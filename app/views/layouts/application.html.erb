@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Third</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+       <% if !user_signed_in? %>
+         <%= link_to 'Sign up', new_user_registration_path%>
+         <%= link_to 'Sign In', new_user_session_path%>
+       <% end %>
+
+       <% if user_signed_in? %>
+         <%#= button_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo: "false" }, class:'nav-link'%>
+         <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+
+         <%= link_to 'Edit profile', edit_user_registration_path%>
+         <%= current_user.email %> <br> <%= current_user.username %> <%= current_user.id %> <br><br>
+
+           <% for i in current_user.post_ids %>
+           <%= current_user.post_ids %>
+           <% end %>
+
+       <% end %>
+
+                <%= link_to 'posts', posts_path%>
+
+
+    <%= yield %>
+    <br><br>
+
+      <%= @w= User.all %>
+      <% @w.each do |i| %>
+        <%= i.username %>
+        <%= i.id %>
+        <%#= link_to i.username, i.username %>
+      <% end %>
+    <br>
+
+
+  </body>
+</html>
